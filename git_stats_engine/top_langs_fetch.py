@@ -17,9 +17,12 @@ def run_query(query, headers):
         raise Exception(f"Query failed to run by returning code of {request.status_code}. {query}")
 
 
-def pie_chart(lang_data):
+def pie_chart(lang_data, sizexy : str):
+
+    size = list(map(int,sizexy.split(',')))
+
     # plt.style.use('dark_background')
-    plt.figure(figsize=(16, 10))
+    plt.figure(figsize=(size[0], size[1]))
     plt.pie(lang_data.values(), labels= lang_data.keys(), autopct=lambda pct: "{:1.1f}%".format(pct))
     plt.legend(title = "Top Langs")
 
@@ -30,12 +33,13 @@ def pie_chart(lang_data):
     return c
 
 
-def donut_chart(lang_data):
+def donut_chart(lang_data, sizexy : str):
     # plt.style.use('dark_background')
 
+    size = list(map(int,sizexy.split(',')))
     explode = [0.05 for _ in range(len(lang_data))]
 
-    plt.figure(figsize=(16, 10))
+    plt.figure(figsize=(size[0], size[1]))
     plt.pie(lang_data.values(), labels= lang_data.keys(), autopct=lambda pct: "{:1.1f}%".format(pct), pctdistance=0.85, explode=explode)
     plt.legend(title = "Top Langs")
 
@@ -52,10 +56,11 @@ def donut_chart(lang_data):
     return c
 
 
-def bar_plot(lang_data):
+def bar_plot(lang_data, sizexy : str):
 
+    size = list(map(int,sizexy.split(',')))
     # plt.style.use('dark_background')
-    plt.figure(figsize=(5, 9))
+    plt.figure(figsize=(size[0], size[1]))
     plt.bar(range(len(lang_data)), list(lang_data.values()), align='center')
     plt.xticks(range(len(lang_data)), list(
         lang_data.keys()), rotation='vertical')
@@ -68,7 +73,7 @@ def bar_plot(lang_data):
     return c
 
 
-async def top_langs(headers, username: str, lang_count : int, layout, exclude_repo : str, exclude_lang : str):
+async def top_langs(headers, username: str, lang_count : int, layout, exclude_repo : str, exclude_lang : str, sizexy: str):
 
     if exclude_repo == "":
         excluded_repo = set()
@@ -155,4 +160,4 @@ async def top_langs(headers, username: str, lang_count : int, layout, exclude_re
         case _:
             draw = pie_chart
 
-    return Response(content=draw(top_sorted_data), media_type='image/svg+xml; charset=utf-8')
+    return Response(content=draw(top_sorted_data, sizexy), media_type='image/svg+xml; charset=utf-8')

@@ -20,5 +20,5 @@ async def index():
     return RedirectResponse(url='https://github.com/RohitSingh107/git-stats-engine')
 
 @app.get('/api/top-langs/')
-async def top_langs_handle(username : str, lang_count : int = 10, layout:str = 'pie', exclude_repo: str = "", exclude_lang: str = ""):
-    return await tlf.top_langs(headers, username=username, lang_count=lang_count, layout=layout, exclude_repo= exclude_repo, exclude_lang=exclude_lang)
+async def top_langs_handle(username : str, lang_count : int = 10, layout:str = 'pie', exclude_repo: str = "", exclude_lang: str = "", sizexy: str = "16,10"):
+    return await tlf.top_langs(headers, username=username, lang_count=lang_count, layout=layout, exclude_repo= exclude_repo, exclude_lang=exclude_lang, sizexy=sizexy)

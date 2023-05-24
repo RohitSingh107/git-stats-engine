@@ -68,8 +68,18 @@ def bar_plot(lang_data):
     return c
 
 
-async def top_langs(headers, username: str, lang_count : int, layout, exclude_repo : set[str]):
-    
+async def top_langs(headers, username: str, lang_count : int, layout, exclude_repo : str, exclude_lang : str):
+
+    if exclude_repo == "":
+        excluded_repo = set()
+    else:
+        excluded_repo = set(exclude_repo.split(','))
+
+    if exclude_lang == "":
+        excluded_lang = set()
+    else:
+        excluded_lang = set(exclude_lang.split(','))
+
     variables = {
         "username": username,
         "noOfRepos": 100,
@@ -104,15 +114,21 @@ async def top_langs(headers, username: str, lang_count : int, layout, exclude_re
     lang_data : dict[str,int] = {}
     total = 0
 
+    # exclude_lang = set(['html', 'qml', 'cmake', 'css', 'objective-c'])
+
     for repo in result["data"]["user"]["repositories"]["nodes"]:
 
-        if repo["name"] in exclude_repo:
+        if repo["name"] in excluded_repo:
             print(f"Excluded repository: {repo['name']}")
             continue
 
         for lang in repo["languages"]["edges"]:
 
             l = lang["node"]["name"]
+            if l.lower() in excluded_lang:
+                print(f"Excluded language: {lang['node']['name']}")
+                continue
+
             s = lang["size"]
 
             total += s

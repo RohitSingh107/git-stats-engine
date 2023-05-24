@@ -1,16 +1,9 @@
-from fastapi import FastAPI, Response
+from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 from dotenv import load_dotenv
 import os
 
 
-
-# from fastapi.responses import FileResponse
-# from PIL import Image
-# import matplotlib.pyplot as plt
-# import io
-
-# from top_langs_fetch import top_langs
 from . import top_langs_fetch as tlf
 
 load_dotenv()
@@ -27,5 +20,5 @@ async def index():
     return RedirectResponse(url='https://github.com/RohitSingh107/git-stats-engine')
 
 @app.get('/api/top-langs/')
-async def top_langs_handle(username : str, lang_count : int = 10, layout:str = 'pie', exclude_repo: str = ""):
-    return await tlf.top_langs(headers, username=username, lang_count=lang_count, layout=layout, exclude_repo= set(exclude_repo.split(',')))
+async def top_langs_handle(username : str, lang_count : int = 10, layout:str = 'pie', exclude_repo: str = "", exclude_lang: str = ""):
+    return await tlf.top_langs(headers, username=username, lang_count=lang_count, layout=layout, exclude_repo= exclude_repo, exclude_lang=exclude_lang)

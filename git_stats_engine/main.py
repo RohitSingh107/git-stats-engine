@@ -24,15 +24,8 @@ app = FastAPI()
 
 @app.get('/')
 async def index():
-    # return {"data": "Hello FastAPI"}
     return RedirectResponse(url='https://github.com/RohitSingh107/git-stats-engine')
 
-
-# @app.get('/bar')
-# async def barPlot():
-#     return Response(content=githubApi.bar_plot(), media_type='image/svg+xml; charset=utf-8')
-#
-
 @app.get('/api/top-langs/')
-async def top_langs_handle(username : str, noOfRepos: int = 100, lang_count : int = 10, layout:str = 'pie'):
-    return await tlf.top_langs(headers, username=username, noOfRepos=noOfRepos, lang_count=lang_count, layout=layout)
+async def top_langs_handle(username : str, lang_count : int = 10, layout:str = 'pie', exclude_repo: str = ""):
+    return await tlf.top_langs(headers, username=username, lang_count=lang_count, layout=layout, exclude_repo= set(exclude_repo.split(',')))

@@ -28,5 +28,5 @@
 
 <p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=rohitsingh107&theme=midnight-purple" alt="rohitsingh107" /></p>
 
-<p><img align="center" src="https://0524-45-248-2-177.in.ngrok.io/bar" alt="rohitsingh107" /></p>
+<p><img align="center" src="https://03df-103-43-34-253.in.ngrok.io/api/top-langs/?username=RohitSingh107&lang_count=15&layout=pie" alt="rohitsingh107" /></p>
 

@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "git-stats-engine"
+version = "0.1.0"
+description = ""
+authors = ["Rohit <RohitSinghEmail@protonmail.com>"]
+readme = "README.md"
+packages = [{include = "git_stats_engine"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+matplotlib = "^3.7.1"
+fastapi = "^0.95.2"
+requests = "^2.31.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

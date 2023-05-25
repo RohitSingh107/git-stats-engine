@@ -146,14 +146,22 @@ async def top_langs(headers, username: str, lang_count : int, layout, exclude_re
     top_sorted_data = dict(it.islice(sorted_data.items(), 0 ,lang_count))
 
     # draw = pie_chart
-    match layout:
-        case 'pie':
-            draw = pie_chart
-        case 'bar':
-            draw = bar_plot
-        case 'donut':
-            draw = donut_chart
-        case _:
-            draw = pie_chart
+    # match layout:
+    #     case 'pie':
+    #         draw = pie_chart
+    #     case 'bar':
+    #         draw = bar_plot
+    #     case 'donut':
+    #         draw = donut_chart
+    #     case _:
+    #         draw = pie_chart
+    if layout == 'pie':
+        draw = pie_chart
+    elif layout == 'bar':
+        draw = bar_plot
+    elif layout == 'donut':
+        draw = donut_chart
+    else:
+        draw = pie_chart
 
     return Response(content=draw(top_sorted_data, sizexy), media_type='image/svg+xml; charset=utf-8')

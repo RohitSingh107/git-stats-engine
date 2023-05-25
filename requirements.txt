@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+matplotlib
+python-dotenv
+requests

@@ -119,19 +119,15 @@ async def top_langs(headers, username: str, lang_count : int, layout, exclude_re
     lang_data : dict[str,int] = {}
     total = 0
 
-    # exclude_lang = set(['html', 'qml', 'cmake', 'css', 'objective-c'])
-
     for repo in result["data"]["user"]["repositories"]["nodes"]:
 
         if repo["name"] in excluded_repo:
-            print(f"Excluded repository: {repo['name']}")
             continue
 
         for lang in repo["languages"]["edges"]:
 
             l = lang["node"]["name"]
             if l.lower() in excluded_lang:
-                print(f"Excluded language: {lang['node']['name']}")
                 continue
 
             s = lang["size"]
